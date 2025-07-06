@@ -66,22 +66,17 @@
 
                 <!-- Error Messages -->
                 @if ($errors->any())
-                    <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <svg class="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-sm font-medium text-red-800">Login Error</h3>
-                                <div class="mt-2 text-sm text-red-700">
-                                    @foreach ($errors->all() as $error)
-                                        <p>{{ $error }}</p>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        @foreach ($errors->all() as $error)
+                            <p class="text-sm">{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
+
+                <!-- Success Messages -->
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                        <p class="text-sm">{{ session('success') }}</p>
                     </div>
                 @endif
 
@@ -104,6 +99,9 @@
                             required
                             class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none transition-all duration-200 bg-gray-50 focus:bg-white @error('username') border-red-500 @enderror"
                         >
+                        @error('username')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Password Field -->
@@ -120,20 +118,23 @@
                             required
                             class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none transition-all duration-200 bg-gray-50 focus:bg-white @error('password') border-red-500 @enderror"
                         >
+                        @error('password')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Remember Me -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input 
-                                id="remember" 
-                                name="remember" 
-                                type="checkbox" 
-                                class="h-4 w-4 text-primary-blue focus:ring-primary-blue border-gray-300 rounded"
-                            >
-                            <label for="remember" class="ml-2 block text-sm text-gray-900">Remember me</label>
-                        </div>
-                    </div>
+                    <!-- <div class="flex items-center">
+                        <input 
+                            type="checkbox" 
+                            name="remember" 
+                            id="remember"
+                            class="h-4 w-4 text-primary-blue focus:ring-primary-blue border-gray-300 rounded"
+                        >
+                        <label for="remember" class="ml-2 block text-sm text-gray-700">
+                            Remember me
+                        </label>
+                    </div> -->
 
                     <!-- Login Button -->
                     <button 
@@ -145,15 +146,15 @@
                 </form>
 
                 <!-- Additional Links -->
-                <div class="text-center mt-6">
+                <!-- <div class="text-center mt-6">
                     <a href="#" class="text-sm text-primary-blue hover:underline">Forgot password?</a>
-                </div>
+                </div> -->
             </div>
         </div>
 
         <!-- Right Side - Welcome Panel -->
         <div class="flex-1 p-8 md:p-12 text-white relative overflow-hidden rounded-r-2xl"
-             style="background-image: url('{{ asset('images/image.png') }}'); background-size: cover; background-position: center;">
+             style="background-image: url('{{ asset('image.png') }}'); background-size: cover; background-position: center;">
             <!-- Tech Pattern Background -->
             <div class="absolute inset-0 tech-pattern opacity-30"></div>
             
